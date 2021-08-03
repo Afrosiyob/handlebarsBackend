@@ -17,11 +17,14 @@ app.engine( 'hbs', hbs.engine );
 app.set( 'view engine', 'hbs' );
 app.set( 'views', 'views' );
 
-// set PORT
-const PORT = process.env.PORT || config.get( "PORT" ) || 5000
 
 // all routes
 app.use( authRouter )
+
+
+
+// set PORT
+const PORT = process.env.PORT || config.get( "PORT" ) || 5000
 
 // run server
 app.listen( PORT, async () =>
