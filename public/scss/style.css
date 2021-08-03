@@ -1,3 +1,4 @@
+@use "sass:meta";
 .auth-page {
   width: 100%;
   height: 100vh;
@@ -6,5 +7,118 @@
   display: flex;
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
+}
+
+.auth-page .left-box {
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  width: 100%;
+  background-color: #2196f3;
+}
+
+@media all and (max-width: 768px) {
+  .auth-page .left-box {
+    display: none;
+  }
+}
+
+.auth-page .right-box {
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 700px;
+}
+
+.auth-page .right-box form {
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  width: 70%;
+  /* label color */
+  /* label focus color */
+  /* label underline focus color */
+  /* valid color */
+  /* invalid color */
+  /* icon prefix focus color */
+}
+
+@media all and (max-width: 768px) {
+  .auth-page .right-box form {
+    width: 90%;
+  }
+}
+
+.auth-page .right-box form .input-field label {
+  color: grey;
+  font-weight: bold;
+}
+
+.auth-page .right-box form .input-field input[type="text"]:focus + label,
+.auth-page .right-box form input[type="password"]:focus + label {
+  color: #03a9f4;
+}
+
+.auth-page .right-box form .input-field input[type="text"]:focus,
+.auth-page .right-box form input[type="password"]:focus {
+  border-bottom: 1px solid #03a9f4;
+  -webkit-box-shadow: 0 1px 0 0 #03a9f4;
+          box-shadow: 0 1px 0 0 #03a9f4;
+}
+
+.auth-page .right-box form .input-field input[type="text"].valid,
+.auth-page .right-box form input[type="password"].valid {
+  border-bottom: 1px solid #00c853;
+  -webkit-box-shadow: 0 1px 0 0 #00c853;
+          box-shadow: 0 1px 0 0 #00c853;
+}
+
+.auth-page .right-box form .input-field input[type="text"].invalid,
+.auth-page .right-box form input[type="password"].invalid {
+  border-bottom: 1px solid red;
+  -webkit-box-shadow: 0 1px 0 0 red;
+          box-shadow: 0 1px 0 0 red;
+}
+
+.auth-page .right-box form .input-field .prefix.active {
+  color: #03a9f4;
+}
+
+@media all and (max-width: 768px) {
+  .auth-page .right-box {
+    width: 100%;
+  }
+}
+
+.not-found-page {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.not-found-page img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
 }
 /*# sourceMappingURL=style.css.map */

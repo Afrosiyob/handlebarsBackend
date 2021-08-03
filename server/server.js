@@ -2,8 +2,11 @@ const express = require("express");
 const config = require("config");
 const { connectDB } = require("../connection/connectionPostgres");
 const exphbs = require("express-handlebars");
-const { authRouter } = require("../src/routes/main.routes");
 const serveIndex = require("serve-index");
+const { pageRouter } = require("../src/routes/page.routes");
+const { userRouter } = require("../src/routes/user.routes");
+const morgan = require("morgan");
+
 // set app server
 const app = express();
 
@@ -18,8 +21,8 @@ app.set("view engine", "hbs");
 app.set("views", "views");
 
 // access json
-app.use(express.json({ extended: true }));
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // static files
 app.use(
@@ -28,8 +31,15 @@ app.use(
     serveIndex("public", { icons: true })
 );
 
+// show request to console only development
+if (app.get("env") === "development") {
+    app.use(morgan("tiny"));
+    // Write log
+}
+
 // all routes
-app.use(authRouter);
+app.use(pageRouter);
+app.use("/user", userRouter);
 
 // set PORT
 const PORT = process.env.PORT || config.get("PORT") || 5000;
