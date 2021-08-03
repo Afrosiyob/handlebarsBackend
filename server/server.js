@@ -1,36 +1,48 @@
-const express = require( "express" )
-const config = require( "config" )
-const { connectDB } = require( "../connection/connectionPostgres" )
-const exphbs = require( 'express-handlebars' );
-const { authRouter } = require( "../src/routes/main.routes" );
-
+const express = require("express");
+const config = require("config");
+const { connectDB } = require("../connection/connectionPostgres");
+const exphbs = require("express-handlebars");
+const { authRouter } = require("../src/routes/main.routes");
+const serveIndex = require("serve-index");
 // set app server
-const app = express()
+const app = express();
 
 // setup handlebars
-const hbs = exphbs.create( {
-    defaultLayout: 'main',
-    extname: 'hbs'
-} )
+const hbs = exphbs.create({
+    defaultLayout: "main",
+    extname: "hbs",
+});
 
-app.engine( 'hbs', hbs.engine );
-app.set( 'view engine', 'hbs' );
-app.set( 'views', 'views' );
+app.engine("hbs", hbs.engine);
+app.set("view engine", "hbs");
+app.set("views", "views");
 
+// access json
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+
+// static files
+app.use(
+    "/public",
+    express.static("public"),
+    serveIndex("public", { icons: true })
+);
 
 // all routes
-app.use( authRouter )
-
-
+app.use(authRouter);
 
 // set PORT
-const PORT = process.env.PORT || config.get( "PORT" ) || 5000
+const PORT = process.env.PORT || config.get("PORT") || 5000;
 
 // run server
-app.listen( PORT, async () =>
-    await connectDB().then( () => {
-        console.log( `Server is runnig on ${ PORT } 😎 ` )
-    } ).catch( ( error ) => {
-        console.log( error );
-    } )
-)
+app.listen(
+    PORT,
+    async() =>
+    await connectDB()
+    .then(() => {
+        console.log(`Server is runnig on ${PORT} 😎 `);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+);
